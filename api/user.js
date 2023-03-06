@@ -62,7 +62,7 @@ router.post("/reset-password", async (req, res) => {
     try {
         let obj = req.body;
         obj.userPassword = await bcrypt.hash(obj.userPassword, 10);
-        let user = await User.getOneUserByCond({ email: obj.email, token: obj.token });
+        let user = await User.getOneUserByCond({ userEmail: obj.email, token: obj.token });
         user = JSON.parse(JSON.stringify(user));
         if (user) {
             let result = await User.updateUser(user.id, {
